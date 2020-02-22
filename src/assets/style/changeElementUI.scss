@@ -1,0 +1,256 @@
+@import './variables.scss';
+
+// element ui样式修改
+// 设计还原
+
+.el-sidebar-wrapper {
+  .el-menu {
+    background: $subMenuBg;
+    border-right: none;
+  }
+
+  .el-submenu {
+    margin-bottom: 8px;
+  }
+
+  .el-menu-item,
+  .el-submenu .el-menu-item {
+    height: 40px;
+    line-height: 40px;
+    min-width: auto;
+  }
+
+  .el-menu-item.is-active {
+    color: #FFFFFF;
+    // ie9
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#3678ff, endColorstr=#45b7ff);
+    background: linear-gradient(270deg, #45b7ff 0%, rgba(54, 120, 255, 1) 100%);
+
+    a {
+      color: #fff;
+    }
+  }
+
+
+  .el-submenu__title {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 $spacing * 2;
+  }
+
+  .el-menu-item {
+    color: #666;
+  }
+
+
+  .el-menu-item:hover,
+  .el-menu-item:focus {
+    background-color: #F0F2F5
+  }
+}
+
+// 显示dropdown的箭头
+.el-dropdown-menu.user-dropdown-menu,
+.el-dropdown-menu.more-menu-dropdown-menu {
+  overflow: visible;
+
+  .el-dropdown-menu__item {
+    // padding: 0 $spacing * 4;
+  }
+}
+
+// dropdown 右边文字间隔
+.el-dropdown-menu__item i {
+  margin-right: $spacing;
+}
+
+
+//  表格 table
+.el-table th {
+  font-weight: normal;
+}
+
+.el-table .cell {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+// 选择框单元格内间距
+.el-table .el-table-column--selection .cell {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+.el-table th>.cell {
+  color: #999 !important;
+}
+
+.el-table__header-wrapper .el-table__header {
+  background-color: #F5F7FA;
+}
+
+// 按钮 medium按钮的最小宽
+.el-button.el-button--medium:not(.is-circle):not(.el-button--text) {
+  min-width: 88px;
+}
+
+
+// Dialog 对话框
+.el-dialog:not(.el-dialog--center) {
+  border-radius: 4px;
+  overflow: hidden;
+
+  .el-dialog__header {
+    background: #F5F7FA;
+    padding: 10px 16px;
+    border-bottom: 1px solid #F5F7FA;
+
+  }
+
+  .el-dialog__title {
+    font-size: 16px;
+    color: #000;
+  }
+
+  .el-dialog__headerbtn {
+    top: 13px;
+    right: 14px;
+  }
+
+  .el-dialog__body {
+    padding: 40px;
+  }
+
+  .el-dialog__footer {
+    border-top: 1px solid #F5F7FA;
+    text-align: center;
+    padding: 5px 20px 5px;
+  }
+}
+
+
+// Dialog 中的表格
+.table-no-padding .el-dialog .el-dialog__body {
+  padding: 0;
+}
+
+.no-padding .el-dialog .el-dialog__body {
+  padding: 0;
+}
+
+// Message Box 不影响center
+.el-message-box:not(.el-message-box--center) {
+  // border-radius: 4px;
+  // overflow: hidden
+  padding-bottom: 0;
+
+  .el-message-box__header {
+    background: #F5F7FA;
+    padding: 10px 16px;
+    border-bottom: 1px solid #F5F7FA;
+  }
+
+  .el-message-box__title {
+    font-size: 16px;
+  }
+
+  .el-message-box__headerbtn {
+    top: 13px;
+    right: 14px;
+  }
+
+  .el-message-box__content {
+    padding: 40px;
+  }
+
+  .el-message-box__status+.el-message-box__message {
+    padding-left: 40px;
+  }
+
+  .el-message-box__btns {
+    border-top: 1px solid #F5F7FA;
+    padding: 5px 20px 5px;
+    text-align: center;
+  }
+
+}
+
+
+// 把确认按钮放左边
+// .el-message-box__btns {
+//   display: inline-flex;
+//   flex-direction: row-reverse;
+//   text-align: center;
+//   width: 100%;
+//   justify-content: center;
+
+//   button {
+//     margin: 0 8px;
+//   }
+// }
+
+// radio
+.radio-plain {
+  .el-radio-button__orig-radio:checked+.el-radio-button__inner {
+    color: #409eff;
+    background-color: #ecf5ff;
+    border-color: #b3d8ff;
+    -webkit-box-shadow: -1px 0 0 0 #b3d8ff;
+    box-shadow: -1px 0 0 0 #b3d8ff;
+  }
+}
+
+.el-radio {
+
+  // radio 禁用状态太模糊，调整样式
+  .el-radio__input.is-disabled.is-checked .el-radio__inner {
+    border-color: #1F93FF;
+    background: #1F93FF;
+    opacity: 0.4;
+  }
+
+  .el-radio__input.is-disabled.is-checked .el-radio__inner::after {
+    background-color: #fff;
+  }
+
+  .el-radio__input.is-disabled+span.el-radio__label {
+    color: #333;
+  }
+
+
+}
+
+//checkbox
+.el-checkbox {
+
+  // checkbox 禁用状态太模糊，调整样式
+  .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner {
+    border-color: #1F93FF;
+    background: #1F93FF;
+    opacity: 0.4;
+  }
+
+  .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
+    border-color: #fff;
+  }
+
+  .el-checkbox__input.is-disabled+span.el-checkbox__label {
+    color: #333;
+  }
+}
+
+
+// 上传控件
+.el-upload__tip {
+  line-height: 14px;
+  color: #999;
+}
+
+// tab
+.el-tabs__active-bar {
+  height: 1px;
+}
+
+.el-tabs__nav-wrap::after {
+  height: 1px;
+}

@@ -1,0 +1,187 @@
+@import './variables.scss';
+// 提供常用的样式
+
+// 分割线
+.split-line-a {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: rgba(199, 201, 204, 1)
+}
+
+.no-scroll {
+  overflow: hidden !important;
+}
+
+
+.clearfix {
+  zoom: 1;
+}
+
+.clearfix:after {
+  content: ".";
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  display: block;
+  clear: both;
+  overflow: hidden;
+}
+
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inline {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+// 字体色
+
+.link {
+  cursor: pointer;
+}
+
+.link:hover {
+  color: $colorPrimary !important;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+.color-default,
+.text-default {
+  color: $primaryTextColor !important;
+}
+
+
+.color-primary,
+.text-primary {
+  color: $colorPrimary !important;
+}
+
+
+.color-success,
+.text-success {
+  color: $colorSuccess !important;
+}
+
+.color-warning,
+.text-warning {
+  color: $colorWarning !important;
+}
+
+.color-danger,
+.text-danger,
+.red {
+  color: $colorDanger !important;
+}
+
+.color-info,
+.text-info {
+  color: $colorInfo !important;
+}
+
+.gray,
+.text-secondary {
+  color: $gray !important;
+}
+
+.secondary-text-color,
+
+.gray2 {
+  color: $secondaryTextColor !important;
+}
+
+.gray3 {
+  color: #999 !important;
+}
+
+// 背景色
+.bg-primary {
+  background-color: $colorPrimary !important;
+}
+
+.bg-success {
+  background-color: $colorSuccess !important;
+}
+
+.bg-warning {
+  background-color: $colorWarning !important;
+}
+
+.bg-danger,
+  {
+  background-color: $colorDanger !important;
+}
+
+.bg-info {
+  background-color: $colorInfo !important;
+}
+
+
+.bg-secondary {
+  background-color: $gray !important;
+}
+
+// 对齐
+.text-left {
+  text-align: left !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+// 显示
+
+.hide {
+  display: none;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+
+// 字体大小
+.text-smaller {
+  font-size: 10px !important;
+}
+
+.text-small {
+  font-size: 12px !important;
+}
+
+.text-medium {
+  font-size: 14px !important;
+}
+
+.text-large {
+  font-size: 18px !important;
+}
+
+.text-larger {
+  font-size: 22px !important;
+}

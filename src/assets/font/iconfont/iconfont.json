@@ -1,0 +1,261 @@
+{
+  "id": "1247847",
+  "name": "v-layout",
+  "font_family": "iconfont-layout",
+  "css_prefix_text": "icon-",
+  "description": "layout框架",
+  "glyphs": [
+    {
+      "icon_id": "2533300",
+      "name": "Exit fullscreen",
+      "font_class": "exit-full-screen",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "5078607",
+      "name": "full-screen",
+      "font_class": "full-screen",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "5180576",
+      "name": "left",
+      "font_class": "left-o",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "8456366",
+      "name": "arrow-down",
+      "font_class": "arrow-down",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "8484707",
+      "name": "icon-顶部导航-在线服务",
+      "font_class": "online-service",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "8488492",
+      "name": "意见反馈",
+      "font_class": "feedback",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "8488493",
+      "name": "退出登录",
+      "font_class": "quit",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "8488494",
+      "name": "修改密码",
+      "font_class": "lock",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "8488495",
+      "name": "个人中心",
+      "font_class": "user",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "9412034",
+      "name": "管理中心",
+      "font_class": "ManagementCenter",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "9412035",
+      "name": "基础资料",
+      "font_class": "BasicsInfo",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "9412045",
+      "name": "正式交付",
+      "font_class": "Deliver",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "9412046",
+      "name": "工地开放",
+      "font_class": "Opening",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "9412047",
+      "name": "专项检查",
+      "font_class": "SpecialCheckitem",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "9412048",
+      "name": "模拟验房",
+      "font_class": "SimulateCheckRoom",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "9412058",
+      "name": "基础资料",
+      "font_class": "Basic",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "9412059",
+      "name": "客户管理",
+      "font_class": "CustomerManagement",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "9412060",
+      "name": "业主APP",
+      "font_class": "OwnerAppAdmin",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "9412061",
+      "name": "运营管理",
+      "font_class": "Operation",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "9412062",
+      "name": "公众号配置",
+      "font_class": "Wechat",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "9414853",
+      "name": "满意度管理",
+      "font_class": "module-care",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "9592041",
+      "name": "logo",
+      "font_class": "logo",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "9635678",
+      "name": "其他",
+      "font_class": "Others",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "9637429",
+      "name": "工作台首页",
+      "font_class": "IndexSetting",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "9637430",
+      "name": "项目检查",
+      "font_class": "ProjectInspect",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "9637431",
+      "name": "文档管理",
+      "font_class": "DocumentManage",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "9637432",
+      "name": "计划管理",
+      "font_class": "Schedule",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "9637434",
+      "name": "专项巡检",
+      "font_class": "SpecialInspectMenu",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "9637435",
+      "name": "统计分析",
+      "font_class": "Statistical",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "9637623",
+      "name": "统计分析",
+      "font_class": "StatisticalReports",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "9637624",
+      "name": "日常服务",
+      "font_class": "DailyService",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "9637625",
+      "name": "呼叫中心",
+      "font_class": "CallCenter",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "9637626",
+      "name": "在线服务",
+      "font_class": "ServiceOnline",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "9637627",
+      "name": "风险管控",
+      "font_class": "RiskcontrolManager",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "9637628",
+      "name": "客户档案",
+      "font_class": "kehudangan",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "9637629",
+      "name": "满意度管理",
+      "font_class": "CustomerCare",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    }
+  ]
+}
