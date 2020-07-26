@@ -1,5 +1,15 @@
+<!--
+ * @Descripttion:
+ * @version:
+ * @Author: lihw02
+ * @Date: 2019-04-25 09:05:56
+ * @LastEditors: lihw02
+ * @LastEditTime: 2020-05-08 19:25:18
+ -->
 <template>
   <div class="about">
+    <layout>
+      <div>
     <el-select
       v-model="value"
       placeholder="请选择"
@@ -42,10 +52,16 @@
       </span>
       </pre>
     </p>
+    </div>
+    </layout>
   </div>
 </template>
 <script>
+import { Layout } from '../../index';
 export default {
+  components: {
+    Layout,
+  },
   data () {
     return {
       options: [

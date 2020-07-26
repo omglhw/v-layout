@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: lihw02
+ * @Date: 2019-04-25 09:05:56
+ * @LastEditors: lihw02
+ * @LastEditTime: 2020-07-08 14:13:58
+ */
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/views/Home.vue';
@@ -13,6 +21,7 @@ export default new Router({
     path: '/',
     name: 'home',
     component: Layout,
+    redirect: '/elementui',
     meta: {
       title: '参数设置',
       icon: 'home'
@@ -54,7 +63,10 @@ export default new Router({
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "Test" */ '@/views/Test.vue')
+    component: () => import(/* webpackChunkName: "Test" */ '@/views/Test.vue'),
+    meta: {
+      title: 'testtest'
+    }
   }
   ],
 });

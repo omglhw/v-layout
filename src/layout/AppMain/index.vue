@@ -4,15 +4,26 @@
       <navbar
         :show-full-screen="!isHideLayout"
         @screenChange="screenChange"
-      />
+      >
+        <template
+          slot="breadcrumb"
+          slot-scope="{data}"
+        >
+          <slot
+            name="breadcrumb"
+            :data="data"
+          ></slot>
+        </template>
+      </navbar>
       <div :class="$style['content']">
         <div :class="$style['inner-content']">
-          <transition
-            name="fade-transform"
-            mode="out-in"
-          >
-            <router-view />
-          </transition>
+          <slot>
+            <transition
+             :name="transitionName">
+            >
+              <router-view class="router-view" />
+            </transition>
+          </slot>
         </div>
       </div>
     </div>
@@ -27,15 +38,25 @@ import Navbar from './Navbar';
 export default {
   name: 'AppMain',
   components: { LayoutFooter, Navbar },
+  props: {
+    isHideLayout: {
+      type: Boolean,
+      default: false
+    },
+  },
   data () {
     return {
       isFullScreen: false,
+      transitionName: 'slide-left'
     };
   },
-  computed: {
-    isHideLayout () {
-      return this.$utils.isHideLayout;
-    },
+  // 监听路由的路径，可以通过不同的路径去选择不同的切换效果
+  watch: {
+    '$route' (to, from) {
+      const toDepth = to.path.split('/').length;
+      const fromDepth = from.path.split('/').length;
+      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
+    }
   },
   methods: {
     screenChange (isFullScreen) {
@@ -97,5 +118,24 @@ $contentMinWidth: 1080px;
   .app-content {
     min-height: 100vh;
   }
+}
+</style>
+<style lang="scss">
+
+.router-view {
+　　margin: 300px auto;
+　　width: 100%;
+　　height: 100%;
+　　transition: all .5s cubic-bezier(.55,0,.1,1);
+}
+.slide-left-enter, .slide-right-leave-active {
+　　opacity: 0;
+　　-webkit-transform: translate(30px, 0);
+　　transform: translate(30px, 0);
+}
+.slide-left-leave-active, .slide-right-enter {
+　　opacity: 0;
+　　-webkit-transform: translate(-30px, 0);
+　　transform: translate(-30px, 0);
 }
 </style>

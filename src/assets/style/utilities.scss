@@ -95,8 +95,7 @@
   color: $colorInfo !important;
 }
 
-.gray,
-.text-secondary {
+.gray {
   color: $gray !important;
 }
 
@@ -184,4 +183,17 @@
 
 .text-larger {
   font-size: 22px !important;
+}
+
+// 字体粗细
+.font-weight-bold {
+  font-weight: 700!important;
+}
+
+.font-weight-normal {
+  font-weight: 400!important;
+}
+
+.font-italic {
+  font-style: italic!important;
 }

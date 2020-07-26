@@ -12,7 +12,7 @@
         @close="handleClose"
       >
         <el-submenu
-          v-for="item in leftMenus"
+          v-for="item in menus"
           :key="item.code"
           :index="item.code"
           padding-style="10px"
@@ -27,7 +27,7 @@
             <a
               v-if="!!item.url"
               :href="item.url"
-              onclick="return false"
+              :target="item.link_target"
             >
               <span
                 :title="item.name"
@@ -45,10 +45,11 @@
               :key="childItem.code"
               :title="childItem.name"
               :index="childItem.code"
+              :class="$style['menu-item']"
             >
               <a
                 :href="childItem.url"
-                onclick="return false"
+                :target="childItem.link_target"
               ><span
                   :href="childItem.url"
                   :class="$style['menu-title']"
@@ -66,10 +67,17 @@
 import { try2JSON } from '../../utils';
 export default {
   name: 'Sidebar',
-
+  props: {
+    leftMenus: {
+      type: Array,
+      default () {
+        return [];
+      },
+    },
+  },
   data () {
     return {
-      leftMenus: this.$utils.leftMenus,
+      menus: this.leftMenus || (this.$utils && this.$utils.leftMenus),
       // activeIndex: '',
     };
   },
@@ -77,11 +85,11 @@ export default {
     routes () {
       return this.$router.options.routes;
     },
-    // 通过跌幅配置的meta selectedMenu和name来选中菜单
+    // 通过路由配置的meta.selectedMenu和name来选中菜单
     activeIndex () {
       if (this.$route) {
         const meta = this.$route.meta;
-        let selectedMenu = this.$route.name;
+        let selectedMenu = this.$route.name || this.$route.path;
         if (meta && meta.selectedMenu) {
           if (Array.isArray(meta.selectedMenu)) {
             const menu = this.findLeftMenus(meta.selectedMenu);
@@ -97,14 +105,26 @@ export default {
       return '';
     },
   },
+  watch: {
+    leftMenus: {
+      immediate: true,
+      handler (newValue, oldValue) {
+        this.menus = this.leftMenus;
+      },
+    },
+  },
   created () {
-    const leftMenusString = localStorage.getItem('leftMenus');
-    this.leftMenus = try2JSON(leftMenusString);
-
-    window.addEventListener('setItem', () => {
+    if (this.leftMenus.length == 0) {
       const leftMenusString = localStorage.getItem('leftMenus');
-      this.leftMenus = try2JSON(leftMenusString);
-    });
+      this.menus = try2JSON(leftMenusString);
+
+      window.addEventListener('setItem', (e) => {
+        if (e.key === 'leftMenus') {
+          const leftMenusString = localStorage.getItem('leftMenus');
+          this.menus = try2JSON(leftMenusString);
+        }
+      });
+    }
   },
   mounted () {},
   methods: {
@@ -117,26 +137,26 @@ export default {
     handleOpen (key, keyPath) {},
     handleClose (key, keyPath) {},
     handleSelect (key, keyPath) {
-      this.leftMenus.forEach(item => {
-        if (key === item.code && item.url) {
-          // 如果一级有url就跳转
-          location.href = item.url;
-        }
-        if (item.childMenus && item.childMenus.length > 0) {
-          item.childMenus.forEach(child => {
-            if (child.code === key && child.url) {
-              // 如果二级有url就跳转
-              location.href = child.url;
-            }
-          });
-        }
-      });
+      // this.menus.forEach(item => {
+      //   if (key === item.code && item.url) {
+      //     // 如果一级有url就跳转
+      //     location.href = item.url;
+      //   }
+      //   if (item.childMenus && item.childMenus.length > 0) {
+      //     item.childMenus.forEach(child => {
+      //       if (child.code === key && child.url) {
+      //         // 如果二级有url就跳转
+      //         location.href = child.url;
+      //       }
+      //     });
+      //   }
+      // });
     },
     // 查找selectedMenus中的项是否在菜单里面出现并返回当前项，否返回空
     findLeftMenus (selectedMenus) {
       let menu = '';
-      if (Array.isArray(this.leftMenus)) {
-        this.leftMenus.some(item => {
+      if (Array.isArray(this.menus)) {
+        this.menus.some(item => {
           if (!item.childMenus) {
             return false;
           }
@@ -199,6 +219,13 @@ export default {
       @include text-overflow;
       display: inline-block;
       width: $sideBarWidth - $spacing * 9;
+    }
+    .menu-item {
+      padding: 0 !important;
+      a {
+        padding: 0 0 0 40px;
+        display: block;
+      }
     }
   }
 }

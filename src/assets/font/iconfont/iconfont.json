@@ -1,9 +1,9 @@
 {
   "id": "1247847",
-  "name": "v-layout",
+  "name": "vue-saas-layout",
   "font_family": "iconfont-layout",
   "css_prefix_text": "icon-",
-  "description": "layout框架",
+  "description": "saas框架",
   "glyphs": [
     {
       "icon_id": "2533300",

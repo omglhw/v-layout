@@ -1,10 +1,10 @@
 <!--
- * @Descripttion:
+ * @Descripttion: 配置版
  * @version:
  * @Author: lihw02
  * @Date: 2019-04-25 09:05:56
  * @LastEditors: lihw02
- * @LastEditTime: 2020-07-21 17:11:12
+ * @LastEditTime: 2020-07-21 16:48:37
  -->
 <template>
   <div :class="$style['app-wrapper']">
@@ -12,7 +12,7 @@
       v-if="!isHideLayout"
       ref="header"
       :top-menus="topMenus"
-      :show-unified-pass="isOpenUnifiedPass"
+      :show-unified-pass="showUnifiedPass"
       :user="user"
       @command="handleCommand"
     ></layout-header>
@@ -57,14 +57,13 @@ export default {
     },
     user: {
       type: Object
+    },
+    showUnifiedPass: {
+      type: Boolean,
+      default: false
     }
+  },
 
-  },
-  data () {
-    return {
-      isOpenUnifiedPass: false
-    };
-  },
   computed: {
     isHideLayout () {
       return this.$utils ? this.$utils.isHideLayout : false;
@@ -72,11 +71,7 @@ export default {
   },
 
   async created () {
-    if (this.$configInstance) {
-      console.log(234);
-      const conf = await this.$configInstance.getConfig('t_config:isOpenUnifiedPass');
-      this.isOpenUnifiedPass = conf == '1';
-    }
+
   },
   mounted () {
 
@@ -92,7 +87,7 @@ export default {
       } else if (command === 'unifiedPass') {
         if (this.$router) {
           //
-          this.$router.push('/unified-pass/user-info');
+          this.$router.push('/unified-pass/tenant-info');
         }
       }
       this.$emit('command', command);

@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: lihw02
+ * @Date: 2019-04-25 09:05:56
+ * @LastEditors: lihw02
+ * @LastEditTime: 2020-07-20 17:36:52
+ */
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router/routers';
@@ -5,7 +13,7 @@ import router from './router/routers';
 import '@/plugins/elementui.js';
 // import '@/assets/font/iconfont/iconfont.css';
 // import './assets/style/reset.scss';
-import layout from '../index';
+import { createApp } from '../index';
 
 Vue.config.productionTip = false;
 
@@ -13,12 +21,17 @@ Vue.prototype.$ELEMENT = {
   size: 'medium'
 };
 
-Vue.use(layout, {
+createApp({
+  vue: Vue,
+  render: h => h(App),
+  router,
   evn: '',
+  // 白名单，支持正则
+  whitelist: ['/test'],
   loginURL: 'https://passport-test.myyscm.com/auth/login',
   // baseURL: '/baseapi',
   baseURL: 'https://app-test.myyscm.com',
-  interceptors: (axios) => {},
+  // interceptors: (axios) => {},
   tokenChange: ({
     token
   }) => {
@@ -31,9 +44,3 @@ Vue.use(layout, {
     console.log(error, 'httpError');
   }
 });
-
-new Vue({
-  router,
-  // store,
-  render: h => h(App),
-}).$mount('#app');

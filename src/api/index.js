@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: lihw02
+ * @Date: 2019-04-25 09:05:56
+ * @LastEditors: lihw02
+ * @LastEditTime: 2020-07-21 16:50:14
+ */
 export default {
   /**
    * 生成一份当前系统中可用权限的权限点与权限校验值映射关系表
@@ -28,4 +36,8 @@ export default {
    * _smp: string 如：ManagementCenter.Applicationauth
    */
   'getLogo': '/bms/Organization/layout/get-logo',
+  // 获取配置 c_config 表
+  'getCommonConfig': '/m/common/get-common-config',
+  // 获取配置 t_config 表
+  'getConfigParam': '/m/Organization/pub/get-config-param',
 };

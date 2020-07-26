@@ -69,15 +69,15 @@
             @command="handleCommand"
           >
             <span :class="$style['el-dropdown-link']">
-              <span>{{userInfo && userInfo.username}}</span> <i class="el-icon-arrow-down el-icon--right"></i>
+              <span>{{userInfo && (userInfo.username || userInfo.userName)}}</span> <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu
               slot="dropdown"
               class="user-dropdown-menu text-center"
               style="min-width:140px"
             >
-              <el-dropdown-item :title="userInfo &&userInfo.tenantName">{{userInfo&&userInfo.tenantName|subString(8)}}{{`(${userInfo&&userInfo.tenantCode})`}}</el-dropdown-item>
-
+              <el-dropdown-item :title="userInfo && userInfo.tenantName">{{userInfo&&userInfo.tenantName|subString(8)}}{{`(${userInfo&&userInfo.tenantCode})`}}</el-dropdown-item>
+              <el-dropdown-item v-if="showUnifiedPass"  command='unifiedPass' icon="iconfont-layout icon-user">通行证中心</el-dropdown-item>
               <!-- <el-dropdown-item icon="iconfont-layout icon-user">个人中心</el-dropdown-item>
               <el-dropdown-item icon="iconfont-layout icon-lock">修改密码</el-dropdown-item>
               <el-dropdown-item icon="iconfont-layout icon-feedback">意见反馈</el-dropdown-item> -->
@@ -106,29 +106,48 @@
 </template>
 
 <script>
-import { logout } from '../../utils/auth';
-import { getQueryStringFromHashOrSearch, try2JSON } from '../../utils';
+
+import {
+  getQueryStringFromHashOrSearch,
+  try2JSON,
+  subString,
+} from '../../utils';
 export default {
   name: 'LayoutHeader',
+  filters: {
+    subString: (value, length, suffix) => {
+      if (!value) return '';
+      value = value.toString();
+      console.log(value, '234');
+      // console.log(subStr, 'subString')
+      return subString(value, length, suffix);
+    },
+  },
   props: {
-    // logo: {
-    //   type: String,
-    //   default: '',
-    //   // default () {
-    //   //   return require('@/assets/images/logo.svg');
-    //   // },
-    // },
+    logo: {
+      type: String,
+      default: '',
+    },
+    topMenus: {
+      type: Array,
+    },
+    user: {
+      type: Object,
+    },
+    showUnifiedPass: {
+      type: Boolean,
+    }
   },
   data () {
     return {
-      topNavs: this.$utils.topNavs,
-      logoUrl: this.$utils.logoUrl,
+      topNavs: this.topMenus || (this.$utils && this.$utils.topNavs),
+      logoUrl: this.logo || (this.$utils && this.$utils.logoUrl),
       screenWidth: document.body.clientWidth,
       // 更多菜单
       moreMenuDropdownVisible: false,
       userDropdownVisible: false,
-      appCode: this.$utils.appCode,
-      userInfo: this.$utils.userInfo,
+      appCode: this.$utils && this.$utils.appCode,
+      userInfo: this.user || (this.$utils && this.$utils.userInfo),
     };
   },
   computed: {
@@ -153,6 +172,14 @@ export default {
         : [];
     },
   },
+  watch: {
+    user: {
+      deep: true,
+      handler (newValue, oldValue) {
+        this.userInfo = this.user;
+      },
+    },
+  },
   // watch: {
   //   $route (to, from) {
   //     if (to.query._ac) {
@@ -164,26 +191,29 @@ export default {
   created () {
     this.appCode = getQueryStringFromHashOrSearch('_ac');
 
-    const topNavsString = localStorage.getItem('topNavs');
-    const dataJson = try2JSON(topNavsString);
-
-    if (dataJson) {
-      this.topNavs = dataJson.topNavs;
-      this.logoUrl = dataJson.logoUrl;
-    }
-
-    // 监听storage 变化
-    window.addEventListener('setItem', () => {
+    if (!this.topMenus) {
       const topNavsString = localStorage.getItem('topNavs');
       const dataJson = try2JSON(topNavsString);
+
       if (dataJson) {
         this.topNavs = dataJson.topNavs;
         this.logoUrl = dataJson.logoUrl;
       }
-    });
-    this.$eventBus.$on('userInfoChange', userInfo => {
-      this.userInfo = userInfo;
-    });
+      // 监听storage 变化
+      window.addEventListener('setItem', (e) => {
+        if (e.key === 'topNavs') {
+          const topNavsString = localStorage.getItem('topNavs');
+          const dataJson = try2JSON(topNavsString);
+          if (dataJson) {
+            this.topNavs = dataJson.topNavs;
+            this.logoUrl = dataJson.logoUrl;
+          }
+        }
+      });
+      this.$eventBus.$on('userInfoChange', userInfo => {
+        this.userInfo = userInfo;
+      });
+    }
     window.addEventListener('resize', () => {
       this.screenWidth = document.body.clientWidth;
     });
@@ -199,10 +229,7 @@ export default {
       this.moreMenuDropdownVisible = visible;
     },
     handleCommand (command) {
-      if (command === 'logout') {
-        // 登出
-        logout(this.$utils.baseURL);
-      }
+      this.$emit('command', command);
     },
     // 服务在线
     onlineService () {

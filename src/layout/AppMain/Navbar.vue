@@ -1,72 +1,74 @@
 <template>
   <div :class="$style['navbar']">
-    <div :class="$style['breadcrumb']">
-      <div
-        v-if="showOnlyOneTitle"
-        class="pull-left"
-      >
-        {{title}}
-      </div>
-      <div
-        v-else
-        class="pull-left"
-      >
-        <div :class="$style['icon-left']">
-          <i
-            class="iconfont-layout icon-left-o"
-            @click="goback()"
-          ></i>
-        </div>
-        <el-breadcrumb
-          :class="$style['app-breadcrumb']"
-          separator="/"
+    <slot name="breadcrumb">
+       <div :class="$style['breadcrumb']">
+        <div
+          v-if="showOnlyOneTitle"
+          class="pull-left"
         >
-          <transition-group name="breadcrumb">
-            <el-breadcrumb-item
-              v-for="(item,index) in levelList"
-              :key="item.path"
-            >
-              <span
-                v-if="item.redirect==='noredirect'||index==levelList.length-1"
-                :class="$style['no-redirect']"
-              >{{
-                item.meta.title }}</span>
-              <a
-                v-else
-                :class="$style['breadcrumb-link']"
-                @click.prevent="handleLink(item)"
-              >{{ item.meta.title }}</a>
-            </el-breadcrumb-item>
-          </transition-group>
-        </el-breadcrumb>
+          {{title}}
+        </div>
+        <div
+          v-else
+          class="pull-left"
+        >
+          <div :class="$style['icon-left']">
+            <i
+              class="iconfont-layout icon-left-o"
+              @click="goback()"
+            ></i>
+          </div>
+          <el-breadcrumb
+            :class="$style['app-breadcrumb']"
+            separator="/"
+          >
+            <transition-group name="breadcrumb">
+              <el-breadcrumb-item
+                v-for="(item,index) in levelList"
+                :key="item.path"
+              >
+                <span
+                  v-if="item.redirect==='noredirect'||index==levelList.length-1"
+                  :class="$style['no-redirect']"
+                >{{
+                  item.meta.title }}</span>
+                <a
+                  v-else
+                  :class="$style['breadcrumb-link']"
+                  @click.prevent="handleLink(item)"
+                >{{ item.meta.title }}</a>
+              </el-breadcrumb-item>
+            </transition-group>
+          </el-breadcrumb>
+        </div>
+        <div
+          v-if="!!leftComponent"
+          :class="$style['left-wrapper']"
+        >
+          <div :is="leftComponent" />
+        </div>
       </div>
-      <div
-        v-if="!!leftComponent"
-        :class="$style['left-wrapper']"
-      >
-        <div :is="leftComponent" />
+      <div :class="$style['navbar-tool']">
+        <el-tooltip
+          v-if="showFullScreen"
+          :content="!isFullScreen?'最大化':'还原'"
+          placement="left"
+        >
+          <i
+            class="iconfont-layout"
+            :class="{[$style['full-screen']]: true, 'icon-full-screen': !isFullScreen, 'icon-exit-full-screen': isFullScreen}"
+            @click="fullScreen"
+          />
+        </el-tooltip>
+        <div
+          v-if="!!toolComponent"
+          :class="$style['tool-wrapper']"
+        >
+          <div :is="toolComponent" />
+        </div>
       </div>
-    </div>
-    <div :class="$style['navbar-tool']">
-      <el-tooltip
-        v-if="showFullScreen"
-        :content="!isFullScreen?'最大化':'还原'"
-        placement="left"
-      >
-        <i
-          class="iconfont-layout"
-          :class="{[$style['full-screen']]: true, 'icon-full-screen': !isFullScreen, 'icon-exit-full-screen': isFullScreen}"
-          @click="fullScreen"
-        />
-      </el-tooltip>
-      <div
-        v-if="!!toolComponent"
-        :class="$style['tool-wrapper']"
-      >
-        <div :is="toolComponent" />
-      </div>
-    </div>
-  </div>
+    </slot>
+</div>
 </template>
 
 <script>

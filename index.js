@@ -1,16 +1,27 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @Author: lihw02
+ * @Date: 2019-04-25 09:05:55
+ * @LastEditors: lihw02
+ * @LastEditTime: 2020-07-21 16:45:37
+ */
+import Vue from 'vue';
+import AppBasic from './packages/AppBasic';
 import Directives from './packages/Directives';
 import Filters from './packages/Filters';
 import Layout from './packages/Layout';
 import Sidebar from './packages/Sidebar';
 import LayoutHeader from './packages/LayoutHeader';
 import Navbar from './packages/Navbar';
-import BasicData from './packages/BasicData';
+
 import http from './packages/Http';
 import auth from './packages/Auth';
 import Utils from './packages/Utils';
 import Space from './packages/Space';
 import SpaceX from './packages/SpaceX';
 import EventBus from './packages/EventBus';
+import Configurator from './packages/Configurator';
 
 import './theme/index.css';
 
@@ -26,9 +37,10 @@ const components = [
   Space,
   SpaceX,
   http,
-  // basicdata 依赖了EventBus 和utils等
-  BasicData,
+  // AppBasic 依赖了EventBus 和utils等
+  AppBasic,
   auth,
+  Configurator,
   {
     nonComponent: true,
     install (Vue, options) {
@@ -54,6 +66,8 @@ const install = function (Vue, options) {
     showTopNavs: true,
     // 如果不显示头部，将不会发获取左侧菜单的请求
     showLeftMenus: true,
+    // 白名单，支持正则
+    whitelist: [],
   };
 
   // 遍历注册全局组件
@@ -70,12 +84,19 @@ const install = function (Vue, options) {
   });
 };
 
+function createApp (config = {}) {
+  const _config = { el: '#app', ...config };
+  // const Vue = _config.vue || _config.Vue;
+  Vue.use({ install }, _config);
+}
+
 export default {
   // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
   install,
 };
 
 export {
+  createApp,
   Layout,
   Sidebar,
   LayoutHeader,

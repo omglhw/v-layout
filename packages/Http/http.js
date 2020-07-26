@@ -32,18 +32,14 @@ export default {
       }
     };
 
-    // 创建axios实例
-    var instance = axios.create({
-      // timeout: 1000 * 12,
-    });
     // 设置post请求头
-    instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     // response.setHeader('Access-Control-Expose-Headers', 'token');
     /**
      * 请求拦截器
      * 每次请求前，如果存在token则在请求头中携带token
      */
-    instance.interceptors.request.use(
+    axios.interceptors.request.use(
       config => {
         // 登录流程控制中，根据本地是否存在token判断用户的登录情况
         // 但是即使token存在，也有可能token是过期的，所以在每次的请求头中携带token
@@ -83,7 +79,7 @@ export default {
       error => Promise.error(error));
 
     // 响应拦截器
-    instance.interceptors.response.use(
+    axios.interceptors.response.use(
       // 请求成功
       res => {
         // 后端是否返回token
@@ -122,6 +118,10 @@ export default {
         //   }
         // }
 
+        if (res.config && res.config.headers && res.config.headers.originRes) {
+          return Promise.resolve(res);
+        }
+
         return Promise.resolve(data);
       },
       // 请求失败
@@ -154,15 +154,16 @@ export default {
           if (response) {
             // 基础接口，如果是401不需要回调 或者 请求被取消
             if (isBaseUrl && (error.code === 'ECONNABORTED' || response.status === 401)) {
-
+              // Promise.reject(error) 天眼当错误记录
+              return Promise.resolve(error);
             } else {
               options.httpError(error);
             }
           }
         }
-        return Promise.reject(response);
+        return Promise.reject(error);
       });
 
-    return instance;
+    return axios;
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <footer :class="$style['footer-container']">
-    <p>Copyright &#169 {{year}} 版权所有</p>
+    <p>Copyright &#169 {{year}} 明源云链 版权所有 鄂ICP备15011531号-1</p>
     <p :class="$style['footer-logo']">
       <svg
         width="100px"
@@ -47,12 +47,12 @@
 <script>
 export default {
   name: 'LayoutFooter',
-  data() {
+  data () {
     return {
       year: new Date().getFullYear(),
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss" module >
